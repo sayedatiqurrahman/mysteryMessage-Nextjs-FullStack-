@@ -42,6 +42,11 @@ const userSchema: Schema<User> = new Schema({
       "please use a valid email address",
     ],
   },
+  password: {
+    type: String,
+    required: [true, "password is required"],
+    minlength: [6, "password must be at least 6 characters"],
+  },
   verifyCode: {
     type: String,
     required: [true, "verify code is required"],

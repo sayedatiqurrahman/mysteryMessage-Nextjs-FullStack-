@@ -45,10 +45,10 @@ export async function POST(request: Request) {
         await existingUserByEmail.save();
       }
     } else {
-      const hashedPassword = await bcrypt.hash(password, 10);
       const expiryDate = new Date();
       expiryDate.setHours(expiryDate.getHours() + 1);
 
+      const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new userModel({
         username,
         email,

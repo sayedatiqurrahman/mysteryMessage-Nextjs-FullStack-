@@ -27,14 +27,18 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (!user) throw new Error("no user found with this identifier");
-          if (!user.isVerified)
+          if (!user?.isVerified) {
             throw new Error("please verify your account before login ");
-
+          }
+          console.log("user", user);
           const isMatchedPass = await bcrypt.compare(
             credentials.password,
             user.password
           );
+
+          console.log("isMatched", isMatchedPass);
           if (isMatchedPass) return user;
+          console.log("isMatched 2", isMatchedPass);
           throw new Error("Incorrect password");
         } catch (error) {
           if (error instanceof Error) {
